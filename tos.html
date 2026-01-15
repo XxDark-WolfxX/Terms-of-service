@@ -1,0 +1,26 @@
+<script>
+const params = new URLSearchParams(location.search);
+const guildId = params.get("guild_id");
+const ownerId = params.get("owner_id");
+
+acceptBtn.onclick = async () => {
+  await fetch("/api/tos/accept", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ guildId, ownerId })
+  });
+
+  document.getElementById("tos-modal").style.display = "none";
+  document.getElementById("rules-modal").style.display = "flex";
+};
+
+document.getElementById("confirm-rules").onclick = async () => {
+  await fetch("/api/rules/confirm", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ guildId })
+  });
+
+  window.location.href = "https://discord.com/oauth2/authorized";
+};
+</script>

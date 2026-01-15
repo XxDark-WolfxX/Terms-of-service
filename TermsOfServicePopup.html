@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Terms of Service Popup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #111827;
+      color: #e5e7eb;
+    }
+
+    a {
+      color: #60a5fa;
+      cursor: pointer;
+    }
+
+    /* Overlay */
+    .modal {
+      display: none;              /* Hidden by default */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    /* Box */
+    .modal-content {
+      background-color: #111827;
+      margin: 5% auto;
+      padding: 0;
+      border-radius: 8px;
+      border: 1px solid #374151;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      animation: slideDown 0.25s ease-out;
+    }
+
+    .modal-header,
+    .modal-footer {
+      padding: 12px 16px;
+      background-color: #1f2937;
+      border-bottom: 1px solid #374151;
+    }
+
+    .modal-footer {
+      border-top: 1px solid #374151;
+      border-bottom: none;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .modal-body {
+      padding: 16px;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+
+    .close {
+      color: #9ca3af;
+      float: right;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #f87171;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 8px 14px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #e5e7eb;
+      border: 1px solid #4b5563;
+    }
+
+    .btn-primary {
+      background: #3b82f6;
+      color: #f9fafb;
+    }
+
+    .btn-primary:hover {
+      background: #2563eb;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-10px); opacity: 0; }
+      to   { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Example checkbox + link -->
+  <label>
+    <input type="checkbox" id="tos-checkbox" />
+    I agree to the
+    <a id="open-tos">Terms of Service</a>.
+  </label>
+
+  <!-- The Modal -->
+  <div id="tos-modal" class="modal" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" id="close-tos">&times;</span>
+        <h2>Terms of Service</h2>
+      </div>
+      <div class="modal-body">
+        <p>
+          These are sample terms of service. Replace this text with your real terms.
+        </p>
+        <p>
+          By using this site, you agree to follow all rules, respect other users,
+          and comply with applicable laws.
+        </p>
+        <p>
+          You are responsible for any content you submit. Do not post illegal,
+          harmful, or abusive material.
+        </p>
+        <p>
+          The service is provided “as is” with no guarantees. Use at your own risk.
+        </p>
+        <!-- Add more paragraphs as needed -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="decline-tos">Decline</button>
+        <button class="btn btn-primary" id="accept-tos">Accept</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("tos-modal");
+    const openBtn = document.getElementById("open-tos");
+    const closeBtn = document.getElementById("close-tos");
+    const declineBtn = document.getElementById("decline-tos");
+    const acceptBtn = document.getElementById("accept-tos");
+    const checkbox = document.getElementById("tos-checkbox");
+
+    function openModal() {
+      modal.style.display = "block";
+      modal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+      modal.setAttribute("aria-hidden", "true");
+    }
+
+    // Open on link click
+    openBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      openModal();
+    });
+
+    // Close on X
+    closeBtn.addEventListener("click", closeModal);
+
+    // Close when clicking outside the box
+    window.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Decline button: uncheck box and close
+    declineBtn.addEventListener("click", () => {
+      checkbox.checked = false;
+      closeModal();
+    });
+
+    // Accept button: check box and close
+    acceptBtn.addEventListener("click", () => {
+      checkbox.checked = true;
+      closeModal();
+      // Here you could also save acceptance to localStorage or send to backend
+    });
+  </script>
+</body>
+</html>

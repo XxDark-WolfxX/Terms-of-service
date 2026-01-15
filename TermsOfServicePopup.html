@@ -4,54 +4,62 @@
 <meta charset="UTF-8">
 <title>Dark Wolf — Terms of Service</title>
 
-<!-- jsPDF for PDF export -->
+<!-- jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-/* ================================
-   DARK WOLF COLOR SYSTEM
+/* ===============================
+   DARK WOLF COLORS
 ================================ */
 :root {
-  --bg-main: #050505;
-  --bg-panel: #0b0b0b;
-
   --wolf-red: #dc2626;
   --wolf-red-dark: #7f1d1d;
   --wolf-glow: rgba(220,38,38,0.35);
-
+  --bg-main: #050505;
+  --bg-panel: #0b0b0b;
   --text-main: #e5e5e5;
   --text-muted: #9ca3af;
 }
 
-/* ================================
-   BASE PAGE + LOCK
-================================ */
 body {
-  margin: 0;
   font-family: "Segoe UI", system-ui, sans-serif;
   background: radial-gradient(circle at top, #140000, #020202);
   color: var(--text-main);
+  margin: 0;
+  padding: 30px;
 }
 
 body.locked {
-  height: 100vh;
   overflow: hidden;
 }
 
-/* ================================
+/* ===============================
+   CHECKBOX AREA
+================================ */
+label {
+  font-size: 0.95rem;
+}
+
+a {
+  color: var(--wolf-red);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* ===============================
    MODAL OVERLAY
 ================================ */
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(2, 2, 2, 0.9);
-  display: flex;
+  background: rgba(2,2,2,0.9);
+  display: none;
   align-items: center;
   justify-content: center;
   z-index: 9999;
 }
 
-/* ================================
+/* ===============================
    MODAL BOX
 ================================ */
 .modal-content {
@@ -63,38 +71,33 @@ body.locked {
   box-shadow: 0 0 45px var(--wolf-glow);
   display: flex;
   flex-direction: column;
-  animation: rise 0.3s ease-out;
   outline: none;
 }
 
-@keyframes rise {
-  from { transform: translateY(20px); opacity: 0; }
-  to   { transform: translateY(0); opacity: 1; }
-}
-
-/* ================================
+/* ===============================
    HEADER
 ================================ */
 .modal-header {
   padding: 18px 20px;
   border-bottom: 1px solid #2a0000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.modal-header h1 {
+.modal-header h2 {
   margin: 0;
-  font-size: 1.35rem;
   color: var(--wolf-red);
   letter-spacing: 0.08em;
-  text-shadow: 0 0 12px var(--wolf-glow);
 }
 
-.modal-header small {
-  display: block;
-  margin-top: 4px;
+.close {
+  font-size: 26px;
+  cursor: pointer;
   color: var(--text-muted);
 }
 
-/* ================================
+/* ===============================
    BODY
 ================================ */
 .modal-body {
@@ -114,7 +117,7 @@ body.locked {
   border-radius: 6px;
 }
 
-/* ================================
+/* ===============================
    FOOTER
 ================================ */
 .modal-footer {
@@ -122,14 +125,12 @@ body.locked {
   border-top: 1px solid #2a0000;
   display: flex;
   justify-content: space-between;
-  gap: 12px;
 }
 
-/* ================================
+/* ===============================
    BUTTONS
 ================================ */
 button {
-  font-size: 0.9rem;
   padding: 10px 18px;
   border-radius: 10px;
   border: none;
@@ -147,64 +148,88 @@ button:disabled {
   border: 1px solid #3f0000;
 }
 
-.btn-decline:hover {
-  background: rgba(220,38,38,0.1);
-}
-
 .btn-accept {
   background: var(--wolf-red);
   color: #020202;
   font-weight: 600;
   box-shadow: 0 0 16px var(--wolf-glow);
 }
-
-.btn-accept:hover:not(:disabled) {
-  background: #b91c1c;
-}
 </style>
 </head>
 
 <body class="locked">
 
-<!-- ================================
-     TERMS MODAL
+<!-- ===============================
+   CHECKBOX + LINK
 ================================ -->
-<div class="modal" role="dialog" aria-modal="true" aria-labelledby="tos-title">
+<label>
+  <input type="checkbox" id="tos-checkbox" />
+  I agree to the
+  <a id="open-tos">Terms of Service</a>.
+</label>
+
+<!-- ===============================
+   MODAL
+================================ -->
+<div id="tos-modal" class="modal" role="dialog" aria-modal="true">
   <div class="modal-content" tabindex="-1">
     <div class="modal-header">
-      <h1 id="tos-title">DARK WOLF — TERMS OF SERVICE</h1>
-      <small>Version 1.0 • Effective Immediately</small>
-    </div>
+     <label>
+    <input type="checkbox" id="tos-checkbox" />
+    I agree to the
+    <a id="open-tos">Terms of Service</a>.
+  </label>
 
-    <div class="modal-body" id="tos-body">
-      <p><strong>Definitions</strong></p>
-      <p>
-        <strong>Shadow</strong> refers to the bot.  
-        <strong>User</strong> refers to anyone interacting with it.
-      </p>
+  <!-- The Modal -->
+  <div id="tos-modal" class="modal" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" id="close-tos">&times;</span>
+        <h2>Terms of Service</h2>
+      </div>
+      <div class="modal-body">
+        <p>
+        Deffinfintions:
+          Shadow: Reffers to the bot in question.
+          The Bot (bot): reffered to bot in question.
+          User: Anybody with a discord account that has membership to the Shadow Crew Discord Server; or someone in general who uses the bot.
+          Date: Having a romantic, sexual, or both types of relationships.
+          Sexual Material: Materal that relates to anything regaurding sex, including jokes, pornography, or any other items that fall under this category.
+          
+        By talking to shadow:
+        </p>
+        <p>
+          You agree to follow all rules, respect other users,
+          and comply with applicable laws. You agree to:
+          
+          A. Not talk about any sexual material, or try to "date" the bot.
+          B. Acknowledge that you are the age of AT LEAST 14, and must be truthful when stating your age.
+          C. Be Held responeable for any missuse of the bot.
+          D. Not to use slurs, or any type of hate speach, nor encourage other users to interact this way.
+          E. Follow the server's rules
+          F. Follow Discord's Terms Of Service and Community Guidelines.
+        </p>
+        <p>
+          You are responsible for any content you submit. Do not post illegal,
+          harmful, or abusive material.
 
-      <p>
-        By interacting with Shadow, you agree to comply with all rules,
-        Discord policies, and applicable laws.
-      </p>
+          If found guilty of breaking any of these terms (A-F), then you may be expected to be unished with the following:
 
-      <p>
-        You may not engage in sexual content, harassment, hate speech,
-        or misuse of the bot. You must be at least 14 years old.
-      </p>
-
-      <p>
-        Violations may result in warnings, kicks, bans, or permanent
-        removal. All decisions are final.
-      </p>
-
-      <p>
-        The service is provided “as is.” Use at your own risk.
-      </p>
-
-      <!-- Spacer forces scroll-to-bottom -->
-      <p style="margin-top:800px; color: var(--text-muted);">
-        You have reached the end of the Terms.
+          a. The breaking of term A will result in a kick from the server that lasts 24 hours. A repeat offense will result in a perma IP ban.
+          b. The breaking of term B will result in a consultaion from the admin, in which you will be put on a trial. During this trial is when you will be asked your true age.
+          It will be after this, that your actions will be looked into. Upon the findings after the ivestigation, we will then decide your punishment. It can range from a 1 hour serverwide mute, to a full perma IP ban,
+          depending on the severity case-by-case.
+          c. Our desicions are final. Any time you have an opinon on wheather or not our ruling is fair, we have an appeal form we may send you. Expect a respnse in 1-3 buisness days.
+          d. The breaking of term D will result in a 1 week kick. A repeat offense will result in a perma IP ban.
+          e,f. The breaking of terms E and F will result in a report being made directly to discord, and a perma IP ban from our server.
+        </p>
+        <p>
+          The service is provided “as is” with no guarantees. Use at your own risk.
+        </p>
+         
+      <!-- Scroll enforcer -->
+      <p style="margin-top:800px;color:var(--text-muted);">
+        End of Terms.
       </p>
     </div>
 
@@ -216,36 +241,57 @@ button:disabled {
 </div>
 
 <script>
-/* ================================
+/* ===============================
    CONFIG
 ================================ */
+const STORAGE_KEY = "darkwolf_tos";
 const TOS_VERSION = "1.0";
-const STORAGE_KEY = "darkwolf_tos_acceptance";
-const WEBHOOK_URL = "PUT_YOUR_DISCORD_WEBHOOK_URL_HERE";
+const WEBHOOK_URL = "PUT_DISCORD_WEBHOOK_HERE";
 
-/* ================================
+/* ===============================
    ELEMENTS
 ================================ */
 const body = document.body;
-const modal = document.querySelector(".modal");
-const modalBox = document.querySelector(".modal-content");
+const modal = document.getElementById("tos-modal");
+const openLink = document.getElementById("open-tos");
+const closeBtn = document.getElementById("close-tos");
+const checkbox = document.getElementById("tos-checkbox");
 const tosBody = document.getElementById("tos-body");
 const acceptBtn = document.getElementById("accept");
 const declineBtn = document.getElementById("decline");
+const modalBox = document.querySelector(".modal-content");
 
-/* ================================
-   FOCUS TRAP (ACCESSIBILITY)
+/* ===============================
+   OPEN MODAL
 ================================ */
-modalBox.focus();
+openLink.onclick = (e) => {
+  e.preventDefault();
+  modal.style.display = "flex";
+  modalBox.focus();
+};
+
+/* ===============================
+   PREVENT CHEESE
+================================ */
+checkbox.onclick = (e) => {
+  if (!localStorage.getItem(STORAGE_KEY)) {
+    e.preventDefault();
+    modal.style.display = "flex";
+  }
+};
+
+/* ===============================
+   FOCUS TRAP
+================================ */
 document.addEventListener("focusin", (e) => {
-  if (!modalBox.contains(e.target)) {
+  if (modal.style.display === "flex" && !modalBox.contains(e.target)) {
     e.stopPropagation();
     modalBox.focus();
   }
 });
 
-/* ================================
-   SCROLL REQUIREMENT
+/* ===============================
+   SCROLL TO ACCEPT
 ================================ */
 tosBody.addEventListener("scroll", () => {
   if (tosBody.scrollTop + tosBody.clientHeight >= tosBody.scrollHeight - 5) {
@@ -253,36 +299,35 @@ tosBody.addEventListener("scroll", () => {
   }
 });
 
-/* ================================
-   ACCEPT HANDLER
+/* ===============================
+   ACCEPT
 ================================ */
 acceptBtn.onclick = () => {
-  const timestamp = new Date().toISOString();
-
   const record = {
     version: TOS_VERSION,
-    acceptedAt: timestamp,
+    acceptedAt: new Date().toISOString(),
     userAgent: navigator.userAgent
   };
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(record));
+  checkbox.checked = true;
 
   logToDiscord(record);
   generatePDF(record);
 
-  modal.remove();
+  modal.style.display = "none";
   body.classList.remove("locked");
 };
 
-/* ================================
-   DECLINE HANDLER
+/* ===============================
+   DECLINE
 ================================ */
 declineBtn.onclick = () => {
-  alert("You must accept the Terms of Service to continue.");
+  alert("You must accept the Terms of Service.");
 };
 
-/* ================================
-   DISCORD LOGGING
+/* ===============================
+   DISCORD LOG
 ================================ */
 function logToDiscord(data) {
   fetch(WEBHOOK_URL, {
@@ -294,31 +339,23 @@ function logToDiscord(data) {
         color: 0xdc2626,
         fields: [
           { name: "Version", value: data.version },
-          { name: "Accepted At", value: data.acceptedAt },
-          { name: "User Agent", value: data.userAgent.slice(0, 200) }
+          { name: "Accepted At", value: data.acceptedAt }
         ]
       }]
     })
-  }).catch(() => {});
+  }).catch(()=>{});
 }
 
-/* ================================
+/* ===============================
    PDF EXPORT
 ================================ */
 function generatePDF(data) {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
-
-  doc.setFontSize(14);
-  doc.text("Dark Wolf — Terms of Service", 10, 15);
-
-  doc.setFontSize(10);
+  doc.text("Dark Wolf Terms of Service", 10, 15);
   doc.text(`Version: ${data.version}`, 10, 25);
-  doc.text(`Accepted At: ${data.acceptedAt}`, 10, 32);
-
-  doc.setFontSize(9);
+  doc.text(`Accepted: ${data.acceptedAt}`, 10, 32);
   doc.text(tosBody.innerText, 10, 45);
-
   doc.save("DarkWolf_TOS.pdf");
 }
 </script>

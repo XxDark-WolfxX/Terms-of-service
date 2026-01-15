@@ -4,19 +4,13 @@
 <meta charset="UTF-8">
 <title>Dark Wolf — Terms of Service</title>
 
-<!-- jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-/* ===============================
-   DARK WOLF COLORS
-================================ */
 :root {
   --wolf-red: #dc2626;
-  --wolf-red-dark: #7f1d1d;
   --wolf-glow: rgba(220,38,38,0.35);
   --bg-main: #050505;
-  --bg-panel: #0b0b0b;
   --text-main: #e5e5e5;
   --text-muted: #9ca3af;
 }
@@ -33,22 +27,12 @@ body.locked {
   overflow: hidden;
 }
 
-/* ===============================
-   CHECKBOX AREA
-================================ */
-label {
-  font-size: 0.95rem;
-}
-
 a {
   color: var(--wolf-red);
   cursor: pointer;
   text-decoration: underline;
 }
 
-/* ===============================
-   MODAL OVERLAY
-================================ */
 .modal {
   position: fixed;
   inset: 0;
@@ -59,9 +43,6 @@ a {
   z-index: 9999;
 }
 
-/* ===============================
-   MODAL BOX
-================================ */
 .modal-content {
   width: 92%;
   max-width: 740px;
@@ -71,12 +52,8 @@ a {
   box-shadow: 0 0 45px var(--wolf-glow);
   display: flex;
   flex-direction: column;
-  outline: none;
 }
 
-/* ===============================
-   HEADER
-================================ */
 .modal-header {
   padding: 18px 20px;
   border-bottom: 1px solid #2a0000;
@@ -88,7 +65,6 @@ a {
 .modal-header h2 {
   margin: 0;
   color: var(--wolf-red);
-  letter-spacing: 0.08em;
 }
 
 .close {
@@ -97,9 +73,6 @@ a {
   color: var(--text-muted);
 }
 
-/* ===============================
-   BODY
-================================ */
 .modal-body {
   padding: 18px 20px;
   max-height: 55vh;
@@ -108,18 +81,6 @@ a {
   font-size: 0.95rem;
 }
 
-.modal-body::-webkit-scrollbar {
-  width: 6px;
-}
-
-.modal-body::-webkit-scrollbar-thumb {
-  background: var(--wolf-red);
-  border-radius: 6px;
-}
-
-/* ===============================
-   FOOTER
-================================ */
 .modal-footer {
   padding: 16px 20px;
   border-top: 1px solid #2a0000;
@@ -127,9 +88,6 @@ a {
   justify-content: space-between;
 }
 
-/* ===============================
-   BUTTONS
-================================ */
 button {
   padding: 10px 18px;
   border-radius: 10px;
@@ -139,7 +97,6 @@ button {
 
 button:disabled {
   opacity: 0.4;
-  cursor: not-allowed;
 }
 
 .btn-decline {
@@ -152,82 +109,65 @@ button:disabled {
   background: var(--wolf-red);
   color: #020202;
   font-weight: 600;
-  box-shadow: 0 0 16px var(--wolf-glow);
 }
 </style>
 </head>
 
 <body class="locked">
 
-<!-- ===============================
-   CHECKBOX + LINK
-================================ -->
 <label>
-  <input type="checkbox" id="tos-checkbox" />
+  <input type="checkbox" id="tos-checkbox">
   I agree to the
   <a id="open-tos">Terms of Service</a>.
 </label>
 
-<!-- ===============================
-   MODAL
-================================ -->
 <div id="tos-modal" class="modal" role="dialog" aria-modal="true">
-  <div class="modal-content" tabindex="-1">
+  <div class="modal-content">
     <div class="modal-header">
-     <label>
-    <input type="checkbox" id="tos-checkbox" />
-    I agree to the
-    <a id="open-tos">Terms of Service</a>.
-  </label>
+      <h2>Terms of Service</h2>
+      <span class="close" id="close-tos">&times;</span>
+    </div>
 
-  <!-- The Modal -->
-  <div id="tos-modal" class="modal" aria-hidden="true" role="dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <span class="close" id="close-tos">&times;</span>
-        <h2>Terms of Service</h2>
-      </div>
-      <div class="modal-body">
-        <p>
-        Deffinfintions:
-          Shadow: Reffers to the bot in question.
-          The Bot (bot): reffered to bot in question.
-          User: Anybody with a discord account that has membership to the Shadow Crew Discord Server; or someone in general who uses the bot.
-          Date: Having a romantic, sexual, or both types of relationships.
-          Sexual Material: Materal that relates to anything regaurding sex, including jokes, pornography, or any other items that fall under this category.
-          
-        By talking to shadow:
-        </p>
-        <p>
-          You agree to follow all rules, respect other users,
-          and comply with applicable laws. You agree to:
-          
-          A. Not talk about any sexual material, or try to "date" the bot.
-          B. Acknowledge that you are the age of AT LEAST 14, and must be truthful when stating your age.
-          C. Be Held responeable for any missuse of the bot.
-          D. Not to use slurs, or any type of hate speach, nor encourage other users to interact this way.
-          E. Follow the server's rules
-          F. Follow Discord's Terms Of Service and Community Guidelines.
-        </p>
-        <p>
-          You are responsible for any content you submit. Do not post illegal,
-          harmful, or abusive material.
+    <div class="modal-body" id="tos-body">
+      <p>
+      Deffinfintions:
+        Shadow: Reffers to the bot in question.
+        The Bot (bot): reffered to bot in question.
+        User: Anybody with a discord account that has membership to the Shadow Crew Discord Server; or someone in general who uses the bot.
+        Date: Having a romantic, sexual, or both types of relationships.
+        Sexual Material: Materal that relates to anything regaurding sex, including jokes, pornography, or any other items that fall under this category.
+        
+      By talking to shadow:
+      </p>
+      <p>
+        You agree to follow all rules, respect other users,
+        and comply with applicable laws. You agree to:
+        
+        A. Not talk about any sexual material, or try to "date" the bot.
+        B. Acknowledge that you are the age of AT LEAST 14, and must be truthful when stating your age.
+        C. Be Held responeable for any missuse of the bot.
+        D. Not to use slurs, or any type of hate speach, nor encourage other users to interact this way.
+        E. Follow the server's rules
+        F. Follow Discord's Terms Of Service and Community Guidelines.
+      </p>
+      <p>
+        You are responsible for any content you submit. Do not post illegal,
+        harmful, or abusive material.
 
-          If found guilty of breaking any of these terms (A-F), then you may be expected to be unished with the following:
+        If found guilty of breaking any of these terms (A-F), then you may be expected to be unished with the following:
 
-          a. The breaking of term A will result in a kick from the server that lasts 24 hours. A repeat offense will result in a perma IP ban.
-          b. The breaking of term B will result in a consultaion from the admin, in which you will be put on a trial. During this trial is when you will be asked your true age.
-          It will be after this, that your actions will be looked into. Upon the findings after the ivestigation, we will then decide your punishment. It can range from a 1 hour serverwide mute, to a full perma IP ban,
-          depending on the severity case-by-case.
-          c. Our desicions are final. Any time you have an opinon on wheather or not our ruling is fair, we have an appeal form we may send you. Expect a respnse in 1-3 buisness days.
-          d. The breaking of term D will result in a 1 week kick. A repeat offense will result in a perma IP ban.
-          e,f. The breaking of terms E and F will result in a report being made directly to discord, and a perma IP ban from our server.
-        </p>
-        <p>
-          The service is provided “as is” with no guarantees. Use at your own risk.
-        </p>
-         
-      <!-- Scroll enforcer -->
+        a. The breaking of term A will result in a kick from the server that lasts 24 hours. A repeat offense will result in a perma IP ban.
+        b. The breaking of term B will result in a consultaion from the admin, in which you will be put on a trial. During this trial is when you will be asked your true age.
+        It will be after this, that your actions will be looked into. Upon the findings after the ivestigation, we will then decide your punishment. It can range from a 1 hour serverwide mute, to a full perma IP ban,
+        depending on the severity case-by-case.
+        c. Our desicions are final. Any time you have an opinon on wheather or not our ruling is fair, we have an appeal form we may send you. Expect a respnse in 1-3 buisness days.
+        d. The breaking of term D will result in a 1 week kick. A repeat offense will result in a perma IP ban.
+        e,f. The breaking of terms E and F will result in a report being made directly to discord, and a perma IP ban from our server.
+      </p>
+      <p>
+        The service is provided “as is” with no guarantees. Use at your own risk.
+      </p>
+
       <p style="margin-top:800px;color:var(--text-muted);">
         End of Terms.
       </p>
@@ -241,17 +181,8 @@ button:disabled {
 </div>
 
 <script>
-/* ===============================
-   CONFIG
-================================ */
 const STORAGE_KEY = "darkwolf_tos";
-const TOS_VERSION = "1.0";
-const WEBHOOK_URL = "PUT_DISCORD_WEBHOOK_HERE";
 
-/* ===============================
-   ELEMENTS
-================================ */
-const body = document.body;
 const modal = document.getElementById("tos-modal");
 const openLink = document.getElementById("open-tos");
 const closeBtn = document.getElementById("close-tos");
@@ -259,20 +190,16 @@ const checkbox = document.getElementById("tos-checkbox");
 const tosBody = document.getElementById("tos-body");
 const acceptBtn = document.getElementById("accept");
 const declineBtn = document.getElementById("decline");
-const modalBox = document.querySelector(".modal-content");
 
-/* ===============================
-   OPEN MODAL
-================================ */
 openLink.onclick = (e) => {
   e.preventDefault();
   modal.style.display = "flex";
-  modalBox.focus();
 };
 
-/* ===============================
-   PREVENT CHEESE
-================================ */
+closeBtn.onclick = () => {
+  modal.style.display = "none";
+};
+
 checkbox.onclick = (e) => {
   if (!localStorage.getItem(STORAGE_KEY)) {
     e.preventDefault();
@@ -280,84 +207,22 @@ checkbox.onclick = (e) => {
   }
 };
 
-/* ===============================
-   FOCUS TRAP
-================================ */
-document.addEventListener("focusin", (e) => {
-  if (modal.style.display === "flex" && !modalBox.contains(e.target)) {
-    e.stopPropagation();
-    modalBox.focus();
-  }
-});
-
-/* ===============================
-   SCROLL TO ACCEPT
-================================ */
 tosBody.addEventListener("scroll", () => {
   if (tosBody.scrollTop + tosBody.clientHeight >= tosBody.scrollHeight - 5) {
     acceptBtn.disabled = false;
   }
 });
 
-/* ===============================
-   ACCEPT
-================================ */
 acceptBtn.onclick = () => {
-  const record = {
-    version: TOS_VERSION,
-    acceptedAt: new Date().toISOString(),
-    userAgent: navigator.userAgent
-  };
-
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(record));
+  localStorage.setItem(STORAGE_KEY, "accepted");
   checkbox.checked = true;
-
-  logToDiscord(record);
-  generatePDF(record);
-
   modal.style.display = "none";
-  body.classList.remove("locked");
+  document.body.classList.remove("locked");
 };
 
-/* ===============================
-   DECLINE
-================================ */
 declineBtn.onclick = () => {
   alert("You must accept the Terms of Service.");
 };
-
-/* ===============================
-   DISCORD LOG
-================================ */
-function logToDiscord(data) {
-  fetch(WEBHOOK_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      embeds: [{
-        title: "🩸 Dark Wolf — ToS Accepted",
-        color: 0xdc2626,
-        fields: [
-          { name: "Version", value: data.version },
-          { name: "Accepted At", value: data.acceptedAt }
-        ]
-      }]
-    })
-  }).catch(()=>{});
-}
-
-/* ===============================
-   PDF EXPORT
-================================ */
-function generatePDF(data) {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-  doc.text("Dark Wolf Terms of Service", 10, 15);
-  doc.text(`Version: ${data.version}`, 10, 25);
-  doc.text(`Accepted: ${data.acceptedAt}`, 10, 32);
-  doc.text(tosBody.innerText, 10, 45);
-  doc.save("DarkWolf_TOS.pdf");
-}
 </script>
 
 </body>
